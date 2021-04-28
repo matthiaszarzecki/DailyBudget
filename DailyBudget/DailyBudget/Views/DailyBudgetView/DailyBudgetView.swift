@@ -13,8 +13,8 @@ struct DailyBudgetView: View {
   var body: some View {
     DailyBudgetDisplay(
       /*amount: viewModel.state.currentBudget,
-      increaseBudget: viewModel.increaseBudget,
-      decreaseBudget: viewModel.decreaseBudget*/
+       increaseBudget: viewModel.increaseBudget,
+       decreaseBudget: viewModel.decreaseBudget*/
     )
   }
 }
@@ -22,6 +22,8 @@ struct DailyBudgetView: View {
 struct DailyBudgetDisplay: View {
   @AppStorage("current_budget") var currentBudget: Int = 0
   @AppStorage("daily_budget") var dailyBudget: Int = 25
+  @AppStorage("reset_date_day") private var resetDateDay: String = ISO8601DateFormatter().string(from: Date.distantPast)
+  @AppStorage("reset_date_month") private var resetDateMonth: String = ISO8601DateFormatter().string(from: Date.distantPast)
   
   //var amount: Int
   //var increaseBudget: (_ amount: Int) -> Void
@@ -33,7 +35,68 @@ struct DailyBudgetDisplay: View {
   }
   
   func checkIfBudgetNeedsResetting() {
+    if let expiryDateMonthParsed = ISO8601DateFormatter().date(from: resetDateMonth),
+       Date() > expiryDateMonthParsed {
+      // If it is the next month
+      print("### Resetting Budget for the month")
+      
+      // Reset current amount to daily amount
+      currentBudget = dailyBudget
+      
+      // Set new reset date for tomorrow
+      resetDateDay = getResetDateForNextDay()
+      print("### Next Daily Reset: \(resetDateDay)")
+      
+      // Set new reset date for next month
+      resetDateMonth = getResetDateForNextMonth()
+      print("### Next Monthly Reset: \(resetDateMonth)")
+    } else if let expiryDateDayParsed = ISO8601DateFormatter().date(from: resetDateDay),
+              Date() > expiryDateDayParsed {
+      // If it is the next day
+      print("### Resetting Budget for the day")
+      
+      // Add daily amount to current amount
+      currentBudget += dailyBudget
+      
+      // Set new reset date for tomorrow
+      resetDateDay = getResetDateForNextDay()
+      print("### Next Daily Reset: \(resetDateDay)")
+      
+      // Set new reset date for next month
+      resetDateMonth = getResetDateForNextMonth()
+      print("### Next Monthly Reset: \(resetDateMonth)")
+    } else {
+      print("### Not Resetting Budget")
+      print("### Next Daily Reset: \(resetDateDay)")
+      print("### Next Monthly Reset: \(resetDateMonth)")
+    }
+  }
+  
+  func getResetDateForNextDay() -> String {
+    // Set expiry date to next day...
+    let expiryAdvance = DateComponents(day: 1)
+    var nextDate = Calendar.current.date(byAdding: expiryAdvance, to: Date())!
     
+    // ...at 0400 in the morning.
+    nextDate = Calendar.current.date(bySettingHour: 4, minute: 0, second: 0, of: nextDate)!
+    
+    let stringDate = ISO8601DateFormatter().string(from: nextDate)
+    return stringDate
+  }
+  
+  func getResetDateForNextMonth() -> String {
+    // Set expiry date to next month...
+    let expiryAdvance = DateComponents(day: 20)
+    var nextDate = Calendar.current.date(byAdding: expiryAdvance, to: Date())!
+    
+    // ...at 0400 in the morning.
+    //nextDate = Calendar.current.date(bySettingHour: 4, minute: 0, second: 0, of: nextDate)!
+    
+    // ...of the first day
+    nextDate = Calendar.current.date(bySetting: .day, value: 1, of: nextDate)!
+    
+    let stringDate = ISO8601DateFormatter().string(from: nextDate)
+    return stringDate
   }
   
   var currentBudgetRow: some View {
@@ -148,8 +211,8 @@ struct DailyBudgetView_Previews: PreviewProvider {
   static var previews: some View {
     DailyBudgetDisplay(
       /*amount: 25,
-      increaseBudget: {_ in },
-      decreaseBudget: {_ in }*/
+       increaseBudget: {_ in },
+       decreaseBudget: {_ in }*/
     )
   }
 }
