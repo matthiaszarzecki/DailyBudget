@@ -21,10 +21,89 @@ struct DailyBudgetView: View {
 
 struct DailyBudgetDisplay: View {
   @AppStorage("current_budget") var currentBudget: Int = 0
+  @AppStorage("daily_budget") var dailyBudget: Int = 25
   
   var amount: Int
   var increaseBudget: (_ amount: Int) -> Void
   var decreaseBudget: (_ amount: Int) -> Void
+  
+  var currentBudgetRow: some View {
+    HStack {
+      let iconSize: CGFloat = 33
+      Button(
+        action: {
+          //decreaseBudget(5)
+          currentBudget -= 5
+        },
+        label: {
+          Image(systemName: "minus")
+            .frame(width: iconSize, height: iconSize, alignment: .center)
+            .backgroundColor(.gray)
+            .foregroundColor(.white)
+            .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
+            .shadow(radius: 10)
+        }
+      )
+      
+      Text("\(currentBudget)")
+        .font(.largeTitle)
+        .padding()
+      
+      Button(
+        action: {
+          //increaseBudget(5)
+          currentBudget += 5
+        },
+        label: {
+          Image(systemName: "plus")
+            .frame(width: iconSize, height: iconSize, alignment: .center)
+            .backgroundColor(.gray)
+            .foregroundColor(.white)
+            .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
+            .shadow(radius: 10)
+        }
+      )
+    }
+  }
+  
+  var dailyBudgetRow: some View {
+    HStack {
+      let iconSize: CGFloat = 33
+      Button(
+        action: {
+          //decreaseBudget(5)
+          dailyBudget -= 5
+        },
+        label: {
+          Image(systemName: "minus")
+            .frame(width: iconSize, height: iconSize, alignment: .center)
+            .backgroundColor(.gray)
+            .foregroundColor(.white)
+            .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
+            .shadow(radius: 10)
+        }
+      )
+      
+      Text("\(dailyBudget)")
+        .font(.largeTitle)
+        .padding()
+      
+      Button(
+        action: {
+          //increaseBudget(5)
+          dailyBudget += 5
+        },
+        label: {
+          Image(systemName: "plus")
+            .frame(width: iconSize, height: iconSize, alignment: .center)
+            .backgroundColor(.gray)
+            .foregroundColor(.white)
+            .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
+            .shadow(radius: 10)
+        }
+      )
+    }
+  }
   
   var body: some View {
     VStack {
@@ -33,44 +112,14 @@ struct DailyBudgetDisplay: View {
       Text("Your Budget")
         .font(.largeTitle)
       
+      currentBudgetRow
+      
       Spacer()
       
-      HStack {
-        let iconSize: CGFloat = 33
-        Button(
-          action: {
-            //decreaseBudget(5)
-            currentBudget -= 5
-          },
-          label: {
-            Image(systemName: "minus")
-              .frame(width: iconSize, height: iconSize, alignment: .center)
-              .backgroundColor(.gray)
-              .foregroundColor(.white)
-              .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
-              .shadow(radius: 10)
-          }
-        )
-        
-        Text("\(currentBudget)")
-          .font(.largeTitle)
-          .padding()
-        
-        Button(
-          action: {
-            //increaseBudget(5)
-            currentBudget += 5
-          },
-          label: {
-            Image(systemName: "plus")
-              .frame(width: iconSize, height: iconSize, alignment: .center)
-              .backgroundColor(.gray)
-              .foregroundColor(.white)
-              .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
-              .shadow(radius: 10)
-          }
-        )
-      }
+      Text("Daily Amount")
+        .font(.largeTitle)
+      
+      dailyBudgetRow
       
       Spacer()
     }
