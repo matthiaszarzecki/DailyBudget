@@ -144,7 +144,7 @@ struct DailyBudgetDisplay: View {
       Button(
         action: {
           //decreaseBudget(5)
-          dailyBudget -= 5
+          dailyBudget -= 1
         },
         label: {
           Image(systemName: "minus")
@@ -163,7 +163,7 @@ struct DailyBudgetDisplay: View {
       Button(
         action: {
           //increaseBudget(5)
-          dailyBudget += 5
+          dailyBudget += 1
         },
         label: {
           Image(systemName: "plus")
