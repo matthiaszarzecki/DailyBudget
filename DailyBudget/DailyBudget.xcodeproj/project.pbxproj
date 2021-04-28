@@ -76,6 +76,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6E9522A02639DFD60039B20B /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				CC18E54C2639983100E69D52 /* Assets.xcassets */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		6E9522A42639DFEC0039B20B /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				CC18E5482639982D00E69D52 /* DailyBudgetApp.swift */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
 		CC18E53C2639982D00E69D52 = {
 			isa = PBXGroup;
 			children = (
@@ -99,12 +115,12 @@
 		CC18E5472639982D00E69D52 /* DailyBudget */ = {
 			isa = PBXGroup;
 			children = (
-				CC18E5482639982D00E69D52 /* DailyBudgetApp.swift */,
-				CC18E57626399D9500E69D52 /* Views */,
-				CC18E57526399C7E00E69D52 /* Extensions */,
-				CC18E54C2639983100E69D52 /* Assets.xcassets */,
 				CC18E5512639983100E69D52 /* Info.plist */,
+				6E9522A42639DFEC0039B20B /* AppDelegate */,
+				CC18E57526399C7E00E69D52 /* Extensions */,
 				CC18E54E2639983100E69D52 /* Preview Content */,
+				6E9522A02639DFD60039B20B /* SupportingFiles */,
+				CC18E57626399D9500E69D52 /* Views */,
 			);
 			path = DailyBudget;
 			sourceTree = "<group>";
