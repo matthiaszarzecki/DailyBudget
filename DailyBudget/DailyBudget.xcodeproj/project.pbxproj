@@ -8,11 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		CC18E5492639982D00E69D52 /* DailyBudgetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC18E5482639982D00E69D52 /* DailyBudgetApp.swift */; };
-		CC18E54B2639982D00E69D52 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC18E54A2639982D00E69D52 /* ContentView.swift */; };
+		CC18E54B2639982D00E69D52 /* DailyBudgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC18E54A2639982D00E69D52 /* DailyBudgetView.swift */; };
 		CC18E54D2639983100E69D52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC18E54C2639983100E69D52 /* Assets.xcassets */; };
 		CC18E5502639983100E69D52 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC18E54F2639983100E69D52 /* Preview Assets.xcassets */; };
 		CC18E55B2639983100E69D52 /* DailyBudgetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC18E55A2639983100E69D52 /* DailyBudgetTests.swift */; };
 		CC18E5662639983100E69D52 /* DailyBudgetUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC18E5652639983100E69D52 /* DailyBudgetUITests.swift */; };
+		CC18E57426399C7300E69D52 /* View-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC18E57326399C7300E69D52 /* View-Extension.swift */; };
+		CC18E57926399DAA00E69D52 /* DailyBudgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC18E57826399DAA00E69D52 /* DailyBudgetViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,7 +37,7 @@
 /* Begin PBXFileReference section */
 		CC18E5452639982D00E69D52 /* DailyBudget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyBudget.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC18E5482639982D00E69D52 /* DailyBudgetApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyBudgetApp.swift; sourceTree = "<group>"; };
-		CC18E54A2639982D00E69D52 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		CC18E54A2639982D00E69D52 /* DailyBudgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyBudgetView.swift; sourceTree = "<group>"; };
 		CC18E54C2639983100E69D52 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CC18E54F2639983100E69D52 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CC18E5512639983100E69D52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -45,6 +47,8 @@
 		CC18E5612639983100E69D52 /* DailyBudgetUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DailyBudgetUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC18E5652639983100E69D52 /* DailyBudgetUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyBudgetUITests.swift; sourceTree = "<group>"; };
 		CC18E5672639983100E69D52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CC18E57326399C7300E69D52 /* View-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View-Extension.swift"; sourceTree = "<group>"; };
+		CC18E57826399DAA00E69D52 /* DailyBudgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyBudgetViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,7 +100,8 @@
 			isa = PBXGroup;
 			children = (
 				CC18E5482639982D00E69D52 /* DailyBudgetApp.swift */,
-				CC18E54A2639982D00E69D52 /* ContentView.swift */,
+				CC18E57626399D9500E69D52 /* Views */,
+				CC18E57526399C7E00E69D52 /* Extensions */,
 				CC18E54C2639983100E69D52 /* Assets.xcassets */,
 				CC18E5512639983100E69D52 /* Info.plist */,
 				CC18E54E2639983100E69D52 /* Preview Content */,
@@ -128,6 +133,39 @@
 				CC18E5672639983100E69D52 /* Info.plist */,
 			);
 			path = DailyBudgetUITests;
+			sourceTree = "<group>";
+		};
+		CC18E57526399C7E00E69D52 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CC18E57326399C7300E69D52 /* View-Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		CC18E57626399D9500E69D52 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CC18E57726399D9C00E69D52 /* DailyBudgetView */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		CC18E57726399D9C00E69D52 /* DailyBudgetView */ = {
+			isa = PBXGroup;
+			children = (
+				CC18E54A2639982D00E69D52 /* DailyBudgetView.swift */,
+				CC18E57A26399DCA00E69D52 /* ViewModel */,
+			);
+			path = DailyBudgetView;
+			sourceTree = "<group>";
+		};
+		CC18E57A26399DCA00E69D52 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CC18E57826399DAA00E69D52 /* DailyBudgetViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,8 +297,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CC18E54B2639982D00E69D52 /* ContentView.swift in Sources */,
+				CC18E54B2639982D00E69D52 /* DailyBudgetView.swift in Sources */,
 				CC18E5492639982D00E69D52 /* DailyBudgetApp.swift in Sources */,
+				CC18E57426399C7300E69D52 /* View-Extension.swift in Sources */,
+				CC18E57926399DAA00E69D52 /* DailyBudgetViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
