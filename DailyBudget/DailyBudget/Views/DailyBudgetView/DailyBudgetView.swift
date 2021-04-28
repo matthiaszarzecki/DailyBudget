@@ -12,9 +12,9 @@ struct DailyBudgetView: View {
   
   var body: some View {
     DailyBudgetDisplay(
-      amount: viewModel.state.currentBudget,
+      /*amount: viewModel.state.currentBudget,
       increaseBudget: viewModel.increaseBudget,
-      decreaseBudget: viewModel.decreaseBudget
+      decreaseBudget: viewModel.decreaseBudget*/
     )
   }
 }
@@ -23,9 +23,18 @@ struct DailyBudgetDisplay: View {
   @AppStorage("current_budget") var currentBudget: Int = 0
   @AppStorage("daily_budget") var dailyBudget: Int = 25
   
-  var amount: Int
-  var increaseBudget: (_ amount: Int) -> Void
-  var decreaseBudget: (_ amount: Int) -> Void
+  //var amount: Int
+  //var increaseBudget: (_ amount: Int) -> Void
+  //var decreaseBudget: (_ amount: Int) -> Void
+  
+  init() {
+    print("### Checking for update after starting app")
+    checkIfBudgetNeedsResetting()
+  }
+  
+  func checkIfBudgetNeedsResetting() {
+    
+  }
   
   var currentBudgetRow: some View {
     HStack {
@@ -123,15 +132,24 @@ struct DailyBudgetDisplay: View {
       
       Spacer()
     }
+    // When the app is put to the foreground,
+    // check if a reset should happen.
+    .onReceive(
+      NotificationCenter.default.publisher(
+        for: UIApplication.willEnterForegroundNotification)
+    ) { _ in
+      print("### Checking for update after putting app into foreground")
+      checkIfBudgetNeedsResetting()
+    }
   }
 }
 
 struct DailyBudgetView_Previews: PreviewProvider {
   static var previews: some View {
     DailyBudgetDisplay(
-      amount: 25,
+      /*amount: 25,
       increaseBudget: {_ in },
-      decreaseBudget: {_ in }
+      decreaseBudget: {_ in }*/
     )
   }
 }
