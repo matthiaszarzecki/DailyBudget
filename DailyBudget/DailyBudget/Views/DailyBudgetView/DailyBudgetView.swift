@@ -110,7 +110,7 @@ struct DailyBudgetDisplay: View {
         label: {
           Image(systemName: "minus")
             .frame(width: iconSize, height: iconSize, alignment: .center)
-            .backgroundColor(.gray)
+            .backgroundColor(.dailyBudgetPurple)
             .foregroundColor(.white)
             .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
             .shadow(radius: 10)
@@ -129,7 +129,7 @@ struct DailyBudgetDisplay: View {
         label: {
           Image(systemName: "plus")
             .frame(width: iconSize, height: iconSize, alignment: .center)
-            .backgroundColor(.gray)
+            .backgroundColor(.dailyBudgetPurple)
             .foregroundColor(.white)
             .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
             .shadow(radius: 10)
@@ -149,7 +149,7 @@ struct DailyBudgetDisplay: View {
         label: {
           Image(systemName: "minus")
             .frame(width: iconSize, height: iconSize, alignment: .center)
-            .backgroundColor(.gray)
+            .backgroundColor(.dailyBudgetPurple)
             .foregroundColor(.white)
             .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
             .shadow(radius: 10)
@@ -168,7 +168,7 @@ struct DailyBudgetDisplay: View {
         label: {
           Image(systemName: "plus")
             .frame(width: iconSize, height: iconSize, alignment: .center)
-            .backgroundColor(.gray)
+            .backgroundColor(.dailyBudgetPurple)
             .foregroundColor(.white)
             .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
             .shadow(radius: 10)
