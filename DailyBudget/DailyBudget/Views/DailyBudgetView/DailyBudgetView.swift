@@ -34,42 +34,53 @@ struct DailyBudgetDisplay: View {
     checkIfBudgetNeedsResetting()
   }
   
-  func checkIfBudgetNeedsResetting() {
+  var shouldUpdateMonth: Bool {
     if let expiryDateMonthParsed = ISO8601DateFormatter().date(from: resetDateMonth),
        Date() > expiryDateMonthParsed {
+      return true
+    }
+    return false
+  }
+  
+  var shouldUpdateDay: Bool {
+    if let expiryDateDayParsed = ISO8601DateFormatter().date(from: resetDateDay),
+       Date() > expiryDateDayParsed {
+      return true
+    }
+    return false
+  }
+  
+  func checkIfBudgetNeedsResetting() {
+    if shouldUpdateMonth {
       // If it is the next month
       print("### Resetting Budget for the month")
       
       // Reset current amount to daily amount
       currentBudget = dailyBudget
       
-      // Set new reset date for tomorrow
-      resetDateDay = getResetDateForNextDay()
-      print("### Next Daily Reset: \(resetDateDay)")
-      
-      // Set new reset date for next month
-      resetDateMonth = getResetDateForNextMonth()
-      print("### Next Monthly Reset: \(resetDateMonth)")
-    } else if let expiryDateDayParsed = ISO8601DateFormatter().date(from: resetDateDay),
-              Date() > expiryDateDayParsed {
+      setResetDates()
+    } else if shouldUpdateDay {
       // If it is the next day
       print("### Resetting Budget for the day")
       
       // Add daily amount to current amount
       currentBudget += dailyBudget
       
-      // Set new reset date for tomorrow
-      resetDateDay = getResetDateForNextDay()
-      print("### Next Daily Reset: \(resetDateDay)")
-      
-      // Set new reset date for next month
-      resetDateMonth = getResetDateForNextMonth()
-      print("### Next Monthly Reset: \(resetDateMonth)")
+      setResetDates()
     } else {
       print("### Not Resetting Budget")
-      print("### Next Daily Reset: \(resetDateDay)")
-      print("### Next Monthly Reset: \(resetDateMonth)")
+      setResetDates()
     }
+  }
+  
+  func setResetDates() {
+    // Set new reset date for tomorrow
+    resetDateDay = getResetDateForNextDay()
+    print("### Next Daily Reset: \(resetDateDay)")
+    
+    // Set new reset date for next month
+    resetDateMonth = getResetDateForNextMonth()
+    print("### Next Monthly Reset: \(resetDateMonth)")
   }
   
   func getResetDateForNextDay() -> String {
@@ -85,16 +96,14 @@ struct DailyBudgetDisplay: View {
   }
   
   func getResetDateForNextMonth() -> String {
-    // Set expiry date to next month...
-    let expiryAdvance = DateComponents(day: 20)
-    var nextDate = Calendar.current.date(byAdding: expiryAdvance, to: Date())!
-    
-    // ...at 0400 in the morning.
-    //nextDate = Calendar.current.date(bySettingHour: 4, minute: 0, second: 0, of: nextDate)!
-    
-    // ...of the first day
-    nextDate = Calendar.current.date(bySetting: .day, value: 1, of: nextDate)!
-    
+    // Set expiry date to the next
+    // possible 1st day, which is the
+    // first day of the next month...
+    var nextDate = Calendar.current.date(bySetting: .day, value: 1, of: Date())!
+
+    // ...at 4am in the morning
+    nextDate = Calendar.current.date(bySetting: .hour, value: 4, of: nextDate)!
+
     let stringDate = ISO8601DateFormatter().string(from: nextDate)
     return stringDate
   }
@@ -110,7 +119,7 @@ struct DailyBudgetDisplay: View {
         label: {
           Image(systemName: "minus")
             .frame(width: iconSize, height: iconSize, alignment: .center)
-            .backgroundColor(.gray)
+            .backgroundColor(.dailyBudgetPurple)
             .foregroundColor(.white)
             .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
             .shadow(radius: 10)
@@ -129,7 +138,7 @@ struct DailyBudgetDisplay: View {
         label: {
           Image(systemName: "plus")
             .frame(width: iconSize, height: iconSize, alignment: .center)
-            .backgroundColor(.gray)
+            .backgroundColor(.dailyBudgetPurple)
             .foregroundColor(.white)
             .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
             .shadow(radius: 10)
@@ -144,12 +153,12 @@ struct DailyBudgetDisplay: View {
       Button(
         action: {
           //decreaseBudget(5)
-          dailyBudget -= 5
+          dailyBudget -= 1
         },
         label: {
           Image(systemName: "minus")
             .frame(width: iconSize, height: iconSize, alignment: .center)
-            .backgroundColor(.gray)
+            .backgroundColor(.dailyBudgetPurple)
             .foregroundColor(.white)
             .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
             .shadow(radius: 10)
@@ -163,12 +172,12 @@ struct DailyBudgetDisplay: View {
       Button(
         action: {
           //increaseBudget(5)
-          dailyBudget += 5
+          dailyBudget += 1
         },
         label: {
           Image(systemName: "plus")
             .frame(width: iconSize, height: iconSize, alignment: .center)
-            .backgroundColor(.gray)
+            .backgroundColor(.dailyBudgetPurple)
             .foregroundColor(.white)
             .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
             .shadow(radius: 10)
