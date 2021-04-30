@@ -158,8 +158,8 @@ struct DailyBudgetDisplay: View {
         label: {
           Image(systemName: "minus")
             .frame(width: iconSize, height: iconSize, alignment: .center)
-            .backgroundColor(.dailyBudgetPurple)
-            .foregroundColor(.white)
+            .backgroundColor(.white)
+            .foregroundColor(.dailyBudgetPurple)
             .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
             .shadow(radius: 10)
         }
@@ -167,6 +167,7 @@ struct DailyBudgetDisplay: View {
       
       Text("\(dailyBudget)")
         .font(.largeTitle)
+        .foregroundColor(.white)
         .padding()
       
       Button(
@@ -177,8 +178,8 @@ struct DailyBudgetDisplay: View {
         label: {
           Image(systemName: "plus")
             .frame(width: iconSize, height: iconSize, alignment: .center)
-            .backgroundColor(.dailyBudgetPurple)
-            .foregroundColor(.white)
+            .backgroundColor(.white)
+            .foregroundColor(.dailyBudgetPurple)
             .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
             .shadow(radius: 10)
         }
@@ -186,24 +187,54 @@ struct DailyBudgetDisplay: View {
     }
   }
   
+  let elementFraction: CGFloat = 0.45
+  var centerFreaction: CGFloat {
+    return 1 - elementFraction * 2
+  }
+  
   var body: some View {
-    VStack {
-      Spacer()
-      
-      Text("Your Budget")
-        .font(.largeTitle)
-      
-      currentBudgetRow
-      
-      Spacer()
-      
-      Text("Daily Amount")
-        .font(.largeTitle)
-      
-      dailyBudgetRow
-      
-      Spacer()
+    GeometryReader { geometry in
+      VStack {
+        // Upper Part
+        ZStack {
+          Rectangle()
+            .foregroundColor(.clear)
+            .frame(width: geometry.size.width, height: geometry.size.height * elementFraction, alignment: .center)
+        
+          VStack {
+            Text("Your Budget")
+              .font(.largeTitle)
+            
+            currentBudgetRow
+          }
+        }
+        
+        SlantedTriangle()
+          .fill(Color.dailyBudgetPurple)
+          .frame(width: geometry.size.width, height: geometry.size.height * centerFreaction)
+          // Move this down to cover
+          // the automatic padding
+          .offset(y: 8)
+
+        // Lower Part
+        ZStack {
+          Rectangle()
+            .foregroundColor(.dailyBudgetPurple)
+            .edgesIgnoringSafeArea(.all)
+            .frame(width: geometry.size.width, height: geometry.size.height * elementFraction, alignment: .center)
+          
+          VStack {
+            Text("Daily Amount")
+              .font(.largeTitle)
+              .foregroundColor(.white)
+              .shadow(radius: 10)
+            
+            dailyBudgetRow
+          }
+        }
+      }
     }
+    
     // When the app is put to the foreground,
     // check if a reset should happen.
     .onReceive(
@@ -213,6 +244,19 @@ struct DailyBudgetDisplay: View {
       print("### Checking for update after putting app into foreground")
       checkIfBudgetNeedsResetting()
     }
+  }
+}
+
+struct SlantedTriangle: Shape {
+  func path(in rect: CGRect) -> Path {
+    var path = Path()
+    
+    path.move(to: CGPoint(x: rect.maxX, y: rect.minY))
+    path.addLine(to: CGPoint(x: rect.minX, y: rect.maxY))
+    path.addLine(to: CGPoint(x: rect.maxX, y: rect.maxY))
+    path.addLine(to: CGPoint(x: rect.maxX, y: rect.minY))
+    
+    return path
   }
 }
 
