@@ -153,10 +153,6 @@ struct DailyBudgetDisplay: View {
       print("### Checking for update after putting app into foreground")
       checkIfBudgetNeedsResetting()
     }
-    .onAppear {
-      print("### Checking for update after starting app")
-      checkIfBudgetNeedsResetting()
-    }
   }
 }
 

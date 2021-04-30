@@ -15,6 +15,11 @@ class DailyBudgetViewModel: ObservableObject {
   @AppStorage("reset_date_day") private var resetDateDay: String = ISO8601DateFormatter().string(from: Date.distantPast)
   @AppStorage("reset_date_month") private var resetDateMonth: String = ISO8601DateFormatter().string(from: Date.distantPast)
   
+  init() {
+    print("### Checking for update after starting app")
+    checkIfBudgetNeedsResetting()
+  }
+  
   var shouldUpdateMonth: Bool {
     if let expiryDateMonthParsed = ISO8601DateFormatter().date(from: resetDateMonth),
        Date() > expiryDateMonthParsed {
