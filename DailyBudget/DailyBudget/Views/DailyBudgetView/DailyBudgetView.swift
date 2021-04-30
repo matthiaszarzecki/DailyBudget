@@ -109,24 +109,48 @@ struct DailyBudgetDisplay: View {
   }
   
   var currentBudgetRow: some View {
-    HStack {
-      RoundedButton(
-        imageName: "minus",
-        action: { currentBudget -= 5 },
-        foregroundColor: .white,
-        backgroundColor: .dailyBudgetPurple
-      )
-      
+    VStack {
       Text("\(currentBudget)")
         .font(.largeTitle)
         .padding()
       
-      RoundedButton(
-        imageName: "plus",
-        action: { currentBudget += 5 },
-        foregroundColor: .white,
-        backgroundColor: .dailyBudgetPurple
-      )
+      HStack {
+        RoundedButton(
+          imageName: "minus",
+          text: "10",
+          action: { currentBudget -= 10 },
+          foregroundColor: .white,
+          backgroundColor: .dailyBudgetPurple
+        )
+        
+        RoundedButton(
+          imageName: "minus",
+          text: "5",
+          action: { currentBudget -= 5 },
+          foregroundColor: .white,
+          backgroundColor: .dailyBudgetPurple
+        )
+        
+        Rectangle()
+          .foregroundColor(.clear)
+          .frame(width: 22, height: 10, alignment: .center)
+
+        RoundedButton(
+          imageName: "plus",
+          text: "5",
+          action: { currentBudget += 5 },
+          foregroundColor: .white,
+          backgroundColor: .dailyBudgetPurple
+        )
+        
+        RoundedButton(
+          imageName: "plus",
+          text: "10",
+          action: { currentBudget += 10 },
+          foregroundColor: .white,
+          backgroundColor: .dailyBudgetPurple
+        )
+      }
     }
   }
   
@@ -134,6 +158,7 @@ struct DailyBudgetDisplay: View {
     HStack {
       RoundedButton(
         imageName: "minus",
+        text: "1",
         action: { dailyBudget -= 1 },
         foregroundColor: .dailyBudgetPurple,
         backgroundColor: .white
@@ -146,6 +171,7 @@ struct DailyBudgetDisplay: View {
 
       RoundedButton(
         imageName: "plus",
+        text: "1",
         action: { dailyBudget += 1 },
         foregroundColor: .dailyBudgetPurple,
         backgroundColor: .white
