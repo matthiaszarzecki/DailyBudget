@@ -110,79 +110,45 @@ struct DailyBudgetDisplay: View {
   
   var currentBudgetRow: some View {
     HStack {
-      let iconSize: CGFloat = 33
-      Button(
-        action: {
-          //decreaseBudget(5)
-          currentBudget -= 5
-        },
-        label: {
-          Image(systemName: "minus")
-            .frame(width: iconSize, height: iconSize, alignment: .center)
-            .backgroundColor(.dailyBudgetPurple)
-            .foregroundColor(.white)
-            .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
-            .shadow(radius: 10)
-        }
+      RoundedButton(
+        imageName: "minus",
+        action: { currentBudget -= 5 },
+        foregroundColor: .white,
+        backgroundColor: .dailyBudgetPurple
       )
       
       Text("\(currentBudget)")
         .font(.largeTitle)
         .padding()
       
-      Button(
-        action: {
-          //increaseBudget(5)
-          currentBudget += 5
-        },
-        label: {
-          Image(systemName: "plus")
-            .frame(width: iconSize, height: iconSize, alignment: .center)
-            .backgroundColor(.dailyBudgetPurple)
-            .foregroundColor(.white)
-            .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
-            .shadow(radius: 10)
-        }
+      RoundedButton(
+        imageName: "plus",
+        action: { currentBudget += 5 },
+        foregroundColor: .white,
+        backgroundColor: .dailyBudgetPurple
       )
     }
   }
   
   var dailyBudgetRow: some View {
     HStack {
-      let iconSize: CGFloat = 33
-      Button(
-        action: {
-          //decreaseBudget(5)
-          dailyBudget -= 1
-        },
-        label: {
-          Image(systemName: "minus")
-            .frame(width: iconSize, height: iconSize, alignment: .center)
-            .backgroundColor(.white)
-            .foregroundColor(.dailyBudgetPurple)
-            .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
-            .shadow(radius: 10)
-        }
+      RoundedButton(
+        imageName: "minus",
+        action: { dailyBudget -= 1 },
+        foregroundColor: .dailyBudgetPurple,
+        backgroundColor: .white
       )
       
       Text("\(dailyBudget)")
         .font(.largeTitle)
         .foregroundColor(.white)
         .padding()
-      
-      Button(
-        action: {
-          //increaseBudget(5)
-          dailyBudget += 1
-        },
-        label: {
-          Image(systemName: "plus")
-            .frame(width: iconSize, height: iconSize, alignment: .center)
-            .backgroundColor(.white)
-            .foregroundColor(.dailyBudgetPurple)
-            .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
-            .shadow(radius: 10)
-        }
+
+      RoundedButton(
+        imageName: "plus",
+        action: { dailyBudget += 1 },
+        foregroundColor: .dailyBudgetPurple,
+        backgroundColor: .white
       )
     }
   }
