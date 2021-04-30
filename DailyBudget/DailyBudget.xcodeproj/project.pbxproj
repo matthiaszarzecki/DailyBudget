@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6E9522A92639E5480039B20B /* Color-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9522A82639E5480039B20B /* Color-Extension.swift */; };
 		6E9FB009263CAD2900C5CBF3 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9FB008263CAD2900C5CBF3 /* RoundedButton.swift */; };
+		6E9FB00C263CB31A00C5CBF3 /* SlantedTriangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9FB00B263CB31A00C5CBF3 /* SlantedTriangle.swift */; };
 		CC18E5492639982D00E69D52 /* DailyBudgetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC18E5482639982D00E69D52 /* DailyBudgetApp.swift */; };
 		CC18E54B2639982D00E69D52 /* DailyBudgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC18E54A2639982D00E69D52 /* DailyBudgetView.swift */; };
 		CC18E54D2639983100E69D52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC18E54C2639983100E69D52 /* Assets.xcassets */; };
@@ -39,6 +40,7 @@
 /* Begin PBXFileReference section */
 		6E9522A82639E5480039B20B /* Color-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color-Extension.swift"; sourceTree = "<group>"; };
 		6E9FB008263CAD2900C5CBF3 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
+		6E9FB00B263CB31A00C5CBF3 /* SlantedTriangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlantedTriangle.swift; sourceTree = "<group>"; };
 		CC18E5452639982D00E69D52 /* DailyBudget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyBudget.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC18E5482639982D00E69D52 /* DailyBudgetApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyBudgetApp.swift; sourceTree = "<group>"; };
 		CC18E54A2639982D00E69D52 /* DailyBudgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyBudgetView.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				6E9FB008263CAD2900C5CBF3 /* RoundedButton.swift */,
+				6E9FB00B263CB31A00C5CBF3 /* SlantedTriangle.swift */,
 			);
 			path = Elements;
 			sourceTree = "<group>";
@@ -329,6 +332,7 @@
 			files = (
 				CC18E54B2639982D00E69D52 /* DailyBudgetView.swift in Sources */,
 				6E9FB009263CAD2900C5CBF3 /* RoundedButton.swift in Sources */,
+				6E9FB00C263CB31A00C5CBF3 /* SlantedTriangle.swift in Sources */,
 				CC18E5492639982D00E69D52 /* DailyBudgetApp.swift in Sources */,
 				CC18E57426399C7300E69D52 /* View-Extension.swift in Sources */,
 				6E9522A92639E5480039B20B /* Color-Extension.swift in Sources */,
