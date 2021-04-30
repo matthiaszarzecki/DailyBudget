@@ -9,14 +9,17 @@ import Foundation
 import SwiftUI
 
 class DailyBudgetViewModel: ObservableObject {
-  @Published private(set) var state = DailyBudgetViewState()
+  @AppStorage("current_budget") var currentBudget: Int = 0
+  @AppStorage("daily_budget") var dailyBudget: Int = 25
+  
+  //@Published private(set) var state = DailyBudgetViewState()
   
   func increaseBudget(amount: Int) {
-    state.currentBudget += amount
+    currentBudget += amount
   }
   
   func decreaseBudget(amount: Int) {
-    state.currentBudget -= amount
+    currentBudget -= amount
   }
   
   struct DailyBudgetViewState {

@@ -12,27 +12,18 @@ struct DailyBudgetView: View {
   
   var body: some View {
     DailyBudgetDisplay(
-      /*amount: viewModel.state.currentBudget,
-       increaseBudget: viewModel.increaseBudget,
-       decreaseBudget: viewModel.decreaseBudget*/
+      amount: $viewModel.currentBudget,
+      dailyAmount: $viewModel.dailyBudget
     )
   }
 }
 
 struct DailyBudgetDisplay: View {
-  @AppStorage("current_budget") var currentBudget: Int = 0
-  @AppStorage("daily_budget") var dailyBudget: Int = 25
+  @Binding var amount: Int
+  @Binding var dailyAmount: Int
+  
   @AppStorage("reset_date_day") private var resetDateDay: String = ISO8601DateFormatter().string(from: Date.distantPast)
   @AppStorage("reset_date_month") private var resetDateMonth: String = ISO8601DateFormatter().string(from: Date.distantPast)
-  
-  //var amount: Int
-  //var increaseBudget: (_ amount: Int) -> Void
-  //var decreaseBudget: (_ amount: Int) -> Void
-  
-  init() {
-    print("### Checking for update after starting app")
-    checkIfBudgetNeedsResetting()
-  }
   
   var shouldUpdateMonth: Bool {
     if let expiryDateMonthParsed = ISO8601DateFormatter().date(from: resetDateMonth),
@@ -56,7 +47,7 @@ struct DailyBudgetDisplay: View {
       print("### Resetting Budget for the month")
       
       // Reset current amount to daily amount
-      currentBudget = dailyBudget
+      //currentBudget = dailyBudget
       
       setResetDates()
     } else if shouldUpdateDay {
@@ -64,7 +55,7 @@ struct DailyBudgetDisplay: View {
       print("### Resetting Budget for the day")
       
       // Add daily amount to current amount
-      currentBudget += dailyBudget
+      //currentBudget += dailyBudget
       
       setResetDates()
     } else {
@@ -110,7 +101,7 @@ struct DailyBudgetDisplay: View {
   
   var currentBudgetRow: some View {
     VStack {
-      Text("\(currentBudget)")
+      Text("\(amount)")
         .font(.largeTitle)
         .padding()
       
@@ -118,7 +109,7 @@ struct DailyBudgetDisplay: View {
         RoundedButton(
           imageName: "minus",
           text: "10",
-          action: { currentBudget -= 10 },
+          action: { amount -= 10 },
           foregroundColor: .white,
           backgroundColor: .dailyBudgetPurple
         )
@@ -126,7 +117,7 @@ struct DailyBudgetDisplay: View {
         RoundedButton(
           imageName: "minus",
           text: "5",
-          action: { currentBudget -= 5 },
+          action: { amount -= 5 },
           foregroundColor: .white,
           backgroundColor: .dailyBudgetPurple
         )
@@ -138,7 +129,7 @@ struct DailyBudgetDisplay: View {
         RoundedButton(
           imageName: "plus",
           text: "5",
-          action: { currentBudget += 5 },
+          action: { amount += 5 },
           foregroundColor: .white,
           backgroundColor: .dailyBudgetPurple
         )
@@ -146,7 +137,7 @@ struct DailyBudgetDisplay: View {
         RoundedButton(
           imageName: "plus",
           text: "10",
-          action: { currentBudget += 10 },
+          action: { amount += 10 },
           foregroundColor: .white,
           backgroundColor: .dailyBudgetPurple
         )
@@ -159,12 +150,12 @@ struct DailyBudgetDisplay: View {
       RoundedButton(
         imageName: "minus",
         text: "1",
-        action: { dailyBudget -= 1 },
+        action: { dailyAmount -= 1 },
         foregroundColor: .dailyBudgetPurple,
         backgroundColor: .white
       )
       
-      Text("\(dailyBudget)")
+      Text("\(dailyAmount)")
         .font(.largeTitle)
         .foregroundColor(.white)
         .padding()
@@ -172,7 +163,7 @@ struct DailyBudgetDisplay: View {
       RoundedButton(
         imageName: "plus",
         text: "1",
-        action: { dailyBudget += 1 },
+        action: { dailyAmount += 1 },
         foregroundColor: .dailyBudgetPurple,
         backgroundColor: .white
       )
@@ -236,6 +227,10 @@ struct DailyBudgetDisplay: View {
       print("### Checking for update after putting app into foreground")
       checkIfBudgetNeedsResetting()
     }
+    .onAppear {
+      print("### Checking for update after starting app")
+      checkIfBudgetNeedsResetting()
+    }
   }
 }
 
@@ -255,9 +250,8 @@ struct SlantedTriangle: Shape {
 struct DailyBudgetView_Previews: PreviewProvider {
   static var previews: some View {
     DailyBudgetDisplay(
-      /*amount: 25,
-       increaseBudget: {_ in },
-       decreaseBudget: {_ in }*/
+      amount: .constant(25),
+      dailyAmount: .constant(25)
     )
   }
 }
