@@ -12,17 +12,20 @@ struct DailyBudgetView: View {
   
   var body: some View {
     DailyBudgetDisplay(
-      amount: $viewModel.currentBudget,
-      dailyAmount: $viewModel.dailyBudget,
+      //amount: viewModel.currentBudget,
+      //dailyAmount: viewModel.dailyBudget,
       checkIfBudgetNeedsResetting: viewModel.checkIfBudgetNeedsResetting
     )
   }
 }
 
 struct DailyBudgetDisplay: View {
-  @Binding var amount: Int
-  @Binding var dailyAmount: Int
+  //var amount: Int
+  //var dailyAmount: Int
   var checkIfBudgetNeedsResetting: () -> Void
+  
+  @AppStorage("current_budget") var amount: Int = 0
+  @AppStorage("daily_budget") var dailyAmount: Int = 25
   
   var currentBudgetRow: some View {
     VStack {
@@ -159,8 +162,8 @@ struct DailyBudgetDisplay: View {
 struct DailyBudgetView_Previews: PreviewProvider {
   static var previews: some View {
     DailyBudgetDisplay(
-      amount: .constant(25),
-      dailyAmount: .constant(25),
+      //amount: 25,
+      //dailyAmount: 25,
       checkIfBudgetNeedsResetting: {}
     )
   }
