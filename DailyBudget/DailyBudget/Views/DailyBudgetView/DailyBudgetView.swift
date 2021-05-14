@@ -12,20 +12,25 @@ struct DailyBudgetView: View {
   
   var body: some View {
     DailyBudgetDisplay(
-      checkIfBudgetNeedsResetting: viewModel.checkIfBudgetNeedsResetting
+      checkIfBudgetNeedsResetting: viewModel.checkIfBudgetNeedsResetting,
+      currentTotalAmount: viewModel.state.currentTotalAmount,
+      currentDailyAmount: viewModel.state.currentDailyAmount,
+      adaptTotalAmount: viewModel.adaptTotalAmount,
+      adaptDailyAmount: viewModel.adaptDailyAmount
     )
   }
 }
 
 struct DailyBudgetDisplay: View {
   var checkIfBudgetNeedsResetting: () -> Void
-  
-  @AppStorage("current_budget") var amount: Int = 0
-  @AppStorage("daily_budget") var dailyAmount: Int = 25
-  
+  var currentTotalAmount: Int
+  var currentDailyAmount: Int
+  var adaptTotalAmount: (Int) -> Void
+  var adaptDailyAmount: (Int) -> Void
+
   var currentBudgetRow: some View {
     VStack {
-      Text("\(amount)")
+      Text("\(currentTotalAmount)")
         .font(.largeTitle)
         .padding()
       
@@ -33,7 +38,7 @@ struct DailyBudgetDisplay: View {
         RoundedButton(
           imageName: "minus",
           text: "10",
-          action: { amount -= 10 },
+          action: { adaptTotalAmount(-10) },
           foregroundColor: .white,
           backgroundColor: .dailyBudgetPurple
         )
@@ -41,7 +46,7 @@ struct DailyBudgetDisplay: View {
         RoundedButton(
           imageName: "minus",
           text: "5",
-          action: { amount -= 5 },
+          action: { adaptTotalAmount(-5) },
           foregroundColor: .white,
           backgroundColor: .dailyBudgetPurple
         )
@@ -53,7 +58,7 @@ struct DailyBudgetDisplay: View {
         RoundedButton(
           imageName: "plus",
           text: "5",
-          action: { amount += 5 },
+          action: { adaptTotalAmount(5) },
           foregroundColor: .white,
           backgroundColor: .dailyBudgetPurple
         )
@@ -61,7 +66,7 @@ struct DailyBudgetDisplay: View {
         RoundedButton(
           imageName: "plus",
           text: "10",
-          action: { amount += 10 },
+          action: { adaptTotalAmount(10) },
           foregroundColor: .white,
           backgroundColor: .dailyBudgetPurple
         )
@@ -74,12 +79,12 @@ struct DailyBudgetDisplay: View {
       RoundedButton(
         imageName: "minus",
         text: "1",
-        action: { dailyAmount -= 1 },
+        action: { adaptDailyAmount(-1) },
         foregroundColor: .dailyBudgetPurple,
         backgroundColor: .white
       )
       
-      Text("\(dailyAmount)")
+      Text("\(currentDailyAmount)")
         .font(.largeTitle)
         .foregroundColor(.white)
         .padding()
@@ -87,7 +92,7 @@ struct DailyBudgetDisplay: View {
       RoundedButton(
         imageName: "plus",
         text: "1",
-        action: { dailyAmount += 1 },
+        action: { adaptDailyAmount(1) },
         foregroundColor: .dailyBudgetPurple,
         backgroundColor: .white
       )
@@ -168,7 +173,11 @@ struct DailyBudgetDisplay: View {
 struct DailyBudgetView_Previews: PreviewProvider {
   static var previews: some View {
     DailyBudgetDisplay(
-      checkIfBudgetNeedsResetting: {}
+      checkIfBudgetNeedsResetting: {},
+      currentTotalAmount: 120,
+      currentDailyAmount: 23,
+      adaptTotalAmount: {_ in },
+      adaptDailyAmount: {_ in }
     )
   }
 }

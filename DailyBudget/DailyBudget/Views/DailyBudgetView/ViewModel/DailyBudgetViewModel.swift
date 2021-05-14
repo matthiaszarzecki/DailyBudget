@@ -9,15 +9,36 @@ import Foundation
 import SwiftUI
 
 class DailyBudgetViewModel: ObservableObject {
-  @AppStorage("current_budget") var currentBudget: Int = 0
-  @AppStorage("daily_budget") var dailyBudget: Int = 25
+  @Published private(set) var state = DailyBudgetViewState()
   
   @AppStorage("reset_date_day") private var resetDateDay: String = ISO8601DateFormatter().string(from: Date.distantPast)
   @AppStorage("reset_date_month") private var resetDateMonth: String = ISO8601DateFormatter().string(from: Date.distantPast)
   
+  @AppStorage("current_budget") var savedTotalAmount: Int = 0
+  @AppStorage("daily_budget") var savedDailyAmount: Int = 25
+  
   init() {
+    state.currentTotalAmount = savedTotalAmount
+    state.currentDailyAmount = savedDailyAmount
+    
     print("### Checking for update after starting app")
     checkIfBudgetNeedsResetting()
+  }
+  
+  func adaptTotalAmount(amount: Int) {
+    self.state.currentTotalAmount += amount
+    savedTotalAmount = self.state.currentTotalAmount
+  }
+  
+  /// Resets the Total Amount to the saved Monthly Amount.
+  func resetTotalAmount() {
+    self.state.currentTotalAmount = self.state.currentDailyAmount
+    savedTotalAmount = self.state.currentTotalAmount
+  }
+  
+  func adaptDailyAmount(amount: Int) {
+    self.state.currentDailyAmount += amount
+    savedDailyAmount = self.state.currentDailyAmount
   }
   
   var shouldUpdateMonth: Bool {
@@ -42,7 +63,7 @@ class DailyBudgetViewModel: ObservableObject {
       print("### Resetting Budget for the month")
       
       // Reset current amount to daily amount
-      //currentBudget = dailyBudget
+      resetTotalAmount()
       
       setResetDates()
     } else if shouldUpdateDay {
@@ -50,7 +71,7 @@ class DailyBudgetViewModel: ObservableObject {
       print("### Resetting Budget for the day")
       
       // Add daily amount to current amount
-      //currentBudget += dailyBudget
+      adaptTotalAmount(amount: state.currentDailyAmount)
       
       setResetDates()
     } else {
@@ -92,5 +113,10 @@ class DailyBudgetViewModel: ObservableObject {
 
     let stringDate = ISO8601DateFormatter().string(from: nextDate)
     return stringDate
+  }
+  
+  struct DailyBudgetViewState {
+    var currentTotalAmount = 0
+    var currentDailyAmount = 0
   }
 }
