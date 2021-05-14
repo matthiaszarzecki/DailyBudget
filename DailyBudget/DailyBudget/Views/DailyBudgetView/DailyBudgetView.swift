@@ -94,6 +94,12 @@ struct DailyBudgetDisplay: View {
     }
   }
   
+  var verticalSpacer: some View {
+    Rectangle()
+      .frame(width: 20, height: 100, alignment: .center)
+      .foregroundColor(.clear)
+  }
+  
   let elementFraction: CGFloat = 0.45
   var centerFreaction: CGFloat {
     return 1 - elementFraction * 2
@@ -109,6 +115,8 @@ struct DailyBudgetDisplay: View {
             .frame(width: geometry.size.width, height: geometry.size.height * elementFraction, alignment: .center)
         
           VStack {
+            verticalSpacer
+            
             Text("Your Budget")
               .font(.largeTitle)
             
@@ -138,6 +146,8 @@ struct DailyBudgetDisplay: View {
               .shadow(radius: 10)
             
             dailyBudgetRow
+            
+            verticalSpacer
           }
         }
       }
