@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 extension Color {
-  static let dailyBudgetPurple = Color(hex: "673AB7")
+  static let dailyBudgetPurple = Color(hex: "AC7FFF")
   
   /// Creates a SwiftUI color from a hex code.
   init(hex: String) {
