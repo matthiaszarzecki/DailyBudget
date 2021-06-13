@@ -161,6 +161,7 @@ struct DailyBudgetDisplay: View {
           VStack {
             Text(resetDates)
               .foregroundColor(.white)
+              .multilineTextAlignment(.trailing)
           },
           alignment: .bottom
         )
