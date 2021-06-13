@@ -29,6 +29,12 @@ class DailyBudgetViewModel: ObservableObject {
     return "Reset Day: \(resetDateDay)\nReset Month: \(resetDateMonth)"
   }
   
+  func setDebugDayReset() {
+    // Set new reset date for tomorrow
+    resetDateDay = getResetDateForTwoMinutesFromNow()
+    print("### Next Daily Reset: \(resetDateDay)")
+  }
+  
   func adaptTotalAmount(amount: Int) {
     self.state.currentTotalAmount += amount
     savedTotalAmount = self.state.currentTotalAmount
@@ -101,6 +107,15 @@ class DailyBudgetViewModel: ObservableObject {
     
     // ...at 0400 in the morning.
     nextDate = Calendar.current.date(bySettingHour: 4, minute: 0, second: 0, of: nextDate)!
+    
+    let stringDate = ISO8601DateFormatter().string(from: nextDate)
+    return stringDate
+  }
+  
+  func getResetDateForTwoMinutesFromNow() -> String {
+    // Set expiry date to next day...
+    let expiryAdvance = DateComponents(minute: 2)
+    var nextDate = Calendar.current.date(byAdding: expiryAdvance, to: Date())!
     
     let stringDate = ISO8601DateFormatter().string(from: nextDate)
     return stringDate

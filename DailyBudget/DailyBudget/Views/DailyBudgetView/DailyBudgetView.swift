@@ -17,7 +17,8 @@ struct DailyBudgetView: View {
       currentDailyAmount: viewModel.state.currentDailyAmount,
       adaptTotalAmount: viewModel.adaptTotalAmount,
       adaptDailyAmount: viewModel.adaptDailyAmount,
-      resetDates: viewModel.getResetDatesDisplay()
+      resetDates: viewModel.getResetDatesDisplay(),
+      setDebugDayReset: viewModel.setDebugDayReset
     )
   }
 }
@@ -29,6 +30,7 @@ struct DailyBudgetDisplay: View {
   var adaptTotalAmount: (Int) -> Void
   var adaptDailyAmount: (Int) -> Void
   var resetDates: String
+  var setDebugDayReset: () -> Void
 
   var currentBudgetRow: some View {
     VStack {
@@ -159,6 +161,19 @@ struct DailyBudgetDisplay: View {
         }
         .overlay(
           VStack {
+            Button(
+              action: {
+                setDebugDayReset()
+              },
+              label: {
+                Text("Debug: Reset in 2 minutes")
+                  .padding()
+                  .foregroundColor(.dailyBudgetPurple)
+                  .backgroundColor(.white)
+                  .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                  .padding()
+              }
+            )
             Text(resetDates)
               .foregroundColor(.white)
               .multilineTextAlignment(.trailing)
@@ -188,7 +203,8 @@ struct DailyBudgetView_Previews: PreviewProvider {
       currentDailyAmount: 23,
       adaptTotalAmount: {_ in },
       adaptDailyAmount: {_ in },
-      resetDates: "ResetDate"
+      resetDates: "ResetDate",
+      setDebugDayReset: {}
     )
   }
 }
