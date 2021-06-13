@@ -25,6 +25,10 @@ class DailyBudgetViewModel: ObservableObject {
     checkIfBudgetNeedsResetting()
   }
   
+  func getResetDatesDisplay() -> String {
+    return "Reset Day: \(resetDateDay)\nReset Month: \(resetDateMonth)"
+  }
+  
   func adaptTotalAmount(amount: Int) {
     self.state.currentTotalAmount += amount
     savedTotalAmount = self.state.currentTotalAmount

@@ -16,7 +16,8 @@ struct DailyBudgetView: View {
       currentTotalAmount: viewModel.state.currentTotalAmount,
       currentDailyAmount: viewModel.state.currentDailyAmount,
       adaptTotalAmount: viewModel.adaptTotalAmount,
-      adaptDailyAmount: viewModel.adaptDailyAmount
+      adaptDailyAmount: viewModel.adaptDailyAmount,
+      resetDates: viewModel.getResetDatesDisplay()
     )
   }
 }
@@ -27,6 +28,7 @@ struct DailyBudgetDisplay: View {
   var currentDailyAmount: Int
   var adaptTotalAmount: (Int) -> Void
   var adaptDailyAmount: (Int) -> Void
+  var resetDates: String
 
   var currentBudgetRow: some View {
     VStack {
@@ -155,6 +157,13 @@ struct DailyBudgetDisplay: View {
             verticalSpacer
           }
         }
+        .overlay(
+          VStack {
+            Text(resetDates)
+              .foregroundColor(.white)
+          },
+          alignment: .bottom
+        )
       }
     }
     
@@ -177,7 +186,8 @@ struct DailyBudgetView_Previews: PreviewProvider {
       currentTotalAmount: 120,
       currentDailyAmount: 23,
       adaptTotalAmount: {_ in },
-      adaptDailyAmount: {_ in }
+      adaptDailyAmount: {_ in },
+      resetDates: "ResetDate"
     )
   }
 }
