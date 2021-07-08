@@ -46,7 +46,8 @@ struct DailyBudgetDisplay: View {
           text: "10",
           action: { adaptTotalAmount(-10) },
           foregroundColor: .white,
-          backgroundColor: .dailyBudgetPurple
+          backgroundColor: .dailyBudgetPurple,
+          shadowColor: .dailyBudgetPurple
         )
         
         RoundedButton(
@@ -54,7 +55,8 @@ struct DailyBudgetDisplay: View {
           text: "5",
           action: { adaptTotalAmount(-5) },
           foregroundColor: .white,
-          backgroundColor: .dailyBudgetPurple
+          backgroundColor: .dailyBudgetPurple,
+          shadowColor: .dailyBudgetPurple
         )
         
         Rectangle()
@@ -66,7 +68,8 @@ struct DailyBudgetDisplay: View {
           text: "5",
           action: { adaptTotalAmount(5) },
           foregroundColor: .white,
-          backgroundColor: .dailyBudgetPurple
+          backgroundColor: .dailyBudgetPurple,
+          shadowColor: .dailyBudgetPurple
         )
         
         RoundedButton(
@@ -74,7 +77,8 @@ struct DailyBudgetDisplay: View {
           text: "10",
           action: { adaptTotalAmount(10) },
           foregroundColor: .white,
-          backgroundColor: .dailyBudgetPurple
+          backgroundColor: .dailyBudgetPurple,
+          shadowColor: .dailyBudgetPurple
         )
       }
     }
@@ -87,7 +91,8 @@ struct DailyBudgetDisplay: View {
         text: "1",
         action: { adaptDailyAmount(-1) },
         foregroundColor: .dailyBudgetPurple,
-        backgroundColor: .white
+        backgroundColor: .white,
+        shadowColor: .black
       )
       
       Text("\(currentDailyAmount)")
@@ -100,7 +105,8 @@ struct DailyBudgetDisplay: View {
         text: "1",
         action: { adaptDailyAmount(1) },
         foregroundColor: .dailyBudgetPurple,
-        backgroundColor: .white
+        backgroundColor: .white,
+        shadowColor: .black
       )
     }
   }

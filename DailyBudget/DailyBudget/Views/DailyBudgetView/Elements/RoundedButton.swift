@@ -13,6 +13,7 @@ struct RoundedButton: View {
   let action: () -> Void
   let foregroundColor: Color
   let backgroundColor: Color
+  let shadowColor: Color
   
   let iconSize: CGFloat = 33
   
@@ -31,7 +32,7 @@ struct RoundedButton: View {
         .backgroundColor(backgroundColor)
         .foregroundColor(foregroundColor)
         .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
-        .shadow(radius: 10)
+        .shadow(color: shadowColor, radius: 10)
       }
     )
   }
@@ -44,7 +45,8 @@ struct RoundedButton_Previews: PreviewProvider {
       text: "5",
       action: {},
       foregroundColor: .white,
-      backgroundColor: .dailyBudgetPurple
+      backgroundColor: .dailyBudgetPurple,
+      shadowColor: .dailyBudgetPurple
     )
     .padding()
     .previewLayout(.sizeThatFits)
