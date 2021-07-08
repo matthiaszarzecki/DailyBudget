@@ -32,6 +32,8 @@ struct DailyBudgetDisplay: View {
   var resetDates: String
   var setDebugDayReset: () -> Void
 
+  private let debug = true
+
   var currentBudgetRow: some View {
     VStack {
       Text("\(currentTotalAmount)")
@@ -161,22 +163,24 @@ struct DailyBudgetDisplay: View {
         }
         .overlay(
           VStack {
-            Button(
-              action: {
-                setDebugDayReset()
-              },
-              label: {
-                Text("Debug: Reset in 2 minutes")
-                  .padding()
-                  .foregroundColor(.dailyBudgetPurple)
-                  .backgroundColor(.white)
-                  .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
-                  .padding()
-              }
-            )
-            Text(resetDates)
-              .foregroundColor(.white)
-              .multilineTextAlignment(.trailing)
+            if debug {
+              Button(
+                action: {
+                  setDebugDayReset()
+                },
+                label: {
+                  Text("Debug: Reset in 2 minutes")
+                    .padding()
+                    .foregroundColor(.dailyBudgetPurple)
+                    .backgroundColor(.white)
+                    .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                    .padding()
+                }
+              )
+              Text(resetDates)
+                .foregroundColor(.white)
+                .multilineTextAlignment(.trailing)
+            }
           },
           alignment: .bottom
         )
