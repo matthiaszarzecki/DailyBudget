@@ -42,7 +42,7 @@ class DailyBudgetViewModel: ObservableObject {
   
   /// Resets the Total Amount to the saved Monthly Amount.
   func resetTotalAmount() {
-    self.state.currentTotalAmount = self.state.currentDailyAmount
+    self.state.currentTotalAmount = 0
     savedTotalAmount = self.state.currentTotalAmount
   }
   
@@ -72,9 +72,10 @@ class DailyBudgetViewModel: ObservableObject {
       // If it is the next month
       print("### Resetting Budget for the month")
       
-      // Reset current amount to daily amount
+      // Reset current amount to zero
       resetTotalAmount()
-      
+      adaptTotalAmount(amount: state.currentDailyAmount)
+
       setResetDates()
     } else if shouldUpdateDay {
       // If it is the next day
