@@ -180,7 +180,7 @@ struct DailyBudgetDisplay: View {
                     .foregroundColor(.dailyBudgetPurple)
                     .backgroundColor(.white)
                     .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
-                    .padding()
+                    .padding(.bottom, 44)
                 }
               )
               Text(resetDates)
