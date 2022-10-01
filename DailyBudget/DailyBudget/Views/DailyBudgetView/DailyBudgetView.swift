@@ -185,38 +185,34 @@ struct DailyBudgetDisplay: View {
               .shadow(radius: 10)
             
             dailyBudgetRow
-            
-            verticalSpacer
+              .padding(.bottom, 18)
+
+            VStack {
+              if debug {
+                Button(
+                  action: setDebugDayReset,
+                  label: {
+                    Text("Debug: Reset in 2 minutes")
+                      .padding()
+                      .foregroundColor(.dailyBudgetPurple)
+                      .backgroundColor(.white)
+                      .mask(
+                        RoundedRectangle(
+                          cornerRadius: 10,
+                          style: .continuous
+                        )
+                      )
+                      .shadow(color: .black, radius: 10)
+                      .padding(.bottom, 12)
+                  }
+                )
+                Text(resetDates)
+                  .foregroundColor(.white)
+                  .multilineTextAlignment(.trailing)
+              }
+            }
           }
         }
-        .overlay(
-          VStack {
-            if debug {
-              Button(
-                action: {
-                  setDebugDayReset()
-                },
-                label: {
-                  Text("Debug: Reset in 2 minutes")
-                    .padding()
-                    .foregroundColor(.dailyBudgetPurple)
-                    .backgroundColor(.white)
-                    .mask(
-                      RoundedRectangle(
-                        cornerRadius: 10,
-                        style: .continuous
-                      )
-                    )
-                    .padding(.bottom, 44)
-                }
-              )
-              Text(resetDates)
-                .foregroundColor(.white)
-                .multilineTextAlignment(.trailing)
-            }
-          },
-          alignment: .bottom
-        )
       }
     }
     
