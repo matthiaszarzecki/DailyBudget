@@ -140,17 +140,32 @@ struct DailyBudgetDisplay: View {
             currentBudgetRow
           }
         }
-        
-        SlantedTriangle()
-          .fill(Color.dailyBudgetPurple)
+
+        ZStack {
+          VStack(spacing: 0) {
+            Spacer()
+
+            SlantedTriangleLeft()
+              .fill(Color.dailyBudgetPurpleLight)
+              .frame(
+                width: geometry.size.width,
+                height: geometry.size.height * centerFreaction * 0.75
+              )
+              .shadow(color: .black, radius: 12)
+          }
           .frame(
             width: geometry.size.width,
             height: geometry.size.height * centerFreaction
           )
-          // Move this down to cover
-          // the automatic padding
-          //.offset(y: 8)
-          .shadow(color: .black, radius: 10)
+
+          SlantedTriangleRight()
+            .fill(Color.dailyBudgetPurple)
+            .frame(
+              width: geometry.size.width,
+              height: geometry.size.height * centerFreaction
+            )
+            .shadow(color: .black, radius: 6)
+        }
 
         // Lower Part
         ZStack {
