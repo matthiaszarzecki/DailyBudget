@@ -116,7 +116,7 @@ class DailyBudgetViewModel: ObservableObject {
   func getResetDateForTwoMinutesFromNow() -> String {
     // Set expiry date to next day...
     let expiryAdvance = DateComponents(minute: 2)
-    var nextDate = Calendar.current.date(byAdding: expiryAdvance, to: Date())!
+    let nextDate = Calendar.current.date(byAdding: expiryAdvance, to: Date())!
     
     let stringDate = ISO8601DateFormatter().string(from: nextDate)
     return stringDate

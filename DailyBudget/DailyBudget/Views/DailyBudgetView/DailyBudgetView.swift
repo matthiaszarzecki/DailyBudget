@@ -119,12 +119,12 @@ struct DailyBudgetDisplay: View {
   
   let elementFraction: CGFloat = 0.45
   var centerFreaction: CGFloat {
-    return 1 - elementFraction * 2
+    1 - elementFraction * 2
   }
   
   var body: some View {
     GeometryReader { geometry in
-      VStack {
+      VStack(spacing: 0) {
         // Upper Part
         ZStack {
           Rectangle()
@@ -143,10 +143,13 @@ struct DailyBudgetDisplay: View {
         
         SlantedTriangle()
           .fill(Color.dailyBudgetPurple)
-          .frame(width: geometry.size.width, height: geometry.size.height * centerFreaction)
+          .frame(
+            width: geometry.size.width,
+            height: geometry.size.height * centerFreaction
+          )
           // Move this down to cover
           // the automatic padding
-          .offset(y: 8)
+          //.offset(y: 8)
           .shadow(color: .black, radius: 10)
 
         // Lower Part
@@ -154,7 +157,11 @@ struct DailyBudgetDisplay: View {
           Rectangle()
             .foregroundColor(.dailyBudgetPurple)
             .edgesIgnoringSafeArea(.all)
-            .frame(width: geometry.size.width, height: geometry.size.height * elementFraction, alignment: .center)
+            .frame(
+              width: geometry.size.width,
+              height: geometry.size.height * elementFraction,
+              alignment: .center
+            )
           
           VStack {
             Text("Daily Amount")
@@ -179,7 +186,12 @@ struct DailyBudgetDisplay: View {
                     .padding()
                     .foregroundColor(.dailyBudgetPurple)
                     .backgroundColor(.white)
-                    .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                    .mask(
+                      RoundedRectangle(
+                        cornerRadius: 10,
+                        style: .continuous
+                      )
+                    )
                     .padding(.bottom, 44)
                 }
               )

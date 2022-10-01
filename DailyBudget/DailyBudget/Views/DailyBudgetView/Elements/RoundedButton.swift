@@ -28,7 +28,11 @@ struct RoundedButton: View {
           Text(text)
             .font(.title2)
         }
-        .frame(width: iconSize * 1.8, height: iconSize, alignment: .center)
+        .frame(
+          width: iconSize * 1.8,
+          height: iconSize,
+          alignment: .center
+        )
         .backgroundColor(backgroundColor)
         .foregroundColor(foregroundColor)
         .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
