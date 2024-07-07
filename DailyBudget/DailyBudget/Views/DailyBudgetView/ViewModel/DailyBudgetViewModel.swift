@@ -11,12 +11,18 @@ import SwiftUI
 class DailyBudgetViewModel: ObservableObject {
   @Published private(set) var state = DailyBudgetViewState()
   
-  @AppStorage("reset_date_day") private var resetDateDay: String = ISO8601DateFormatter().string(from: Date.distantPast)
-  @AppStorage("reset_date_month") private var resetDateMonth: String = ISO8601DateFormatter().string(from: Date.distantPast)
-  
-  @AppStorage("current_budget") var savedTotalAmount: Int = 0
-  @AppStorage("daily_budget") var savedDailyAmount: Int = 25
-  
+  @AppStorage("reset_date_day")
+  private var resetDateDay: String = ISO8601DateFormatter().string(from: Date.distantPast)
+
+  @AppStorage("reset_date_month")
+  private var resetDateMonth: String = ISO8601DateFormatter().string(from: Date.distantPast)
+
+  @AppStorage("current_budget")
+  var savedTotalAmount: Int = 0
+
+  @AppStorage("daily_budget")
+  var savedDailyAmount: Int = 25
+
   init() {
     state.currentTotalAmount = savedTotalAmount
     state.currentDailyAmount = savedDailyAmount
@@ -26,9 +32,19 @@ class DailyBudgetViewModel: ObservableObject {
   }
   
   func getResetDatesDisplay() -> String {
-    return "Reset Day: \(resetDateDay)\nReset Month: \(resetDateMonth)"
+    if let dateDay = dateFromString(resetDateDay), let dateMonth = dateFromString(resetDateMonth) {
+      let resetDateDayFormatted = dateDay.formatted()
+      let resetDateMonthFormatted = dateMonth.formatted()
+      return "Reset Day: \(resetDateDayFormatted)\nReset Month: \(resetDateMonthFormatted)"
+    }
+    return ""
   }
-  
+
+  private func dateFromString(_ dateString: String) -> Date? {
+    let date = ISO8601DateFormatter().date(from: dateString)
+    return date
+  }
+
   func setDebugDayReset() {
     // Set new reset date for tomorrow
     resetDateDay = getResetDateForTwoMinutesFromNow()
