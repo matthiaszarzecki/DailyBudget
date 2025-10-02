@@ -195,6 +195,8 @@ struct DailyBudgetDisplay: View {
                     Text("Debug: Reset in 2 minutes")
                       .padding()
                       .foregroundColor(.dailyBudgetPurple)
+                      //.shadow(color: .black, radius: 22)
+                      /*
                       .backgroundColor(.white)
                       .mask(
                         RoundedRectangle(
@@ -203,9 +205,11 @@ struct DailyBudgetDisplay: View {
                         )
                       )
                       .shadow(color: .black, radius: 10)
-                      .padding(.bottom, 12)
+                      .padding(.bottom, 12)*/
                   }
                 )
+                .buttonStyle(.glass)
+
                 Text(resetDates)
                   .foregroundColor(.white)
                   .multilineTextAlignment(.trailing)

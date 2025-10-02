@@ -137,9 +137,14 @@ class DailyBudgetViewModel: ObservableObject {
     let stringDate = ISO8601DateFormatter().string(from: nextDate)
     return stringDate
   }
-  
+
+  // TODO: When on the same day as the reset day, and not reset yet, DO NOT set new reset day
+  // TODO: Add linter
+
+  /// Set expiry date to the next
   func getResetDateForNextMonth() -> String {
-    // Set expiry date to the next
+    // TODO: On the first of the month this sets to the 2nd of the month, not the 1st of the next month
+
     // possible 1st day, which is the
     // first day of the next month...
     var nextDate = Calendar.current.date(bySetting: .day, value: 1, of: Date())!
