@@ -12,47 +12,40 @@ struct RoundedButton: View {
   let text: String
   let action: () -> Void
   let foregroundColor: Color
-  let backgroundColor: Color
   let shadowColor: Color
   
-  let iconSize: CGFloat = 33
-  
+  let iconSize: CGFloat = 22
+
   var body: some View {
     Button(
       action: {
         action()
       },
       label: {
-        HStack {
+        HStack(spacing: 2) {
           Image(systemName: imageName)
           Text(text)
             .font(.title2)
         }
         .frame(
-          width: iconSize * 1.8,
+          width: iconSize * 2,
           height: iconSize,
           alignment: .center
         )
-        .backgroundColor(backgroundColor)
         .foregroundColor(foregroundColor)
-        .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
-        .shadow(color: shadowColor, radius: 10)
       }
     )
+    .buttonStyle(.glass)
   }
 }
 
-struct RoundedButton_Previews: PreviewProvider {
-  static var previews: some View {
-    RoundedButton(
-      imageName: "plus",
-      text: "5",
-      action: {},
-      foregroundColor: .white,
-      backgroundColor: .dailyBudgetPurple,
-      shadowColor: .dailyBudgetPurple
-    )
-    .padding()
-    .previewLayout(.sizeThatFits)
-  }
+#Preview(traits: .sizeThatFitsLayout) {
+  RoundedButton(
+    imageName: "plus",
+    text: "5",
+    action: {},
+    foregroundColor: .dailyBudgetPurple,
+    shadowColor: .dailyBudgetPurple
+  )
+  .padding()
 }

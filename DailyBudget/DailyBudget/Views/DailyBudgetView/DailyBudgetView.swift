@@ -45,8 +45,7 @@ struct DailyBudgetDisplay: View {
           imageName: "minus",
           text: "10",
           action: { adaptTotalAmount(-10) },
-          foregroundColor: .white,
-          backgroundColor: .dailyBudgetPurple,
+          foregroundColor: .dailyBudgetPurple,
           shadowColor: .dailyBudgetPurple
         )
         
@@ -54,8 +53,7 @@ struct DailyBudgetDisplay: View {
           imageName: "minus",
           text: "5",
           action: { adaptTotalAmount(-5) },
-          foregroundColor: .white,
-          backgroundColor: .dailyBudgetPurple,
+          foregroundColor: .dailyBudgetPurple,
           shadowColor: .dailyBudgetPurple
         )
         
@@ -67,8 +65,7 @@ struct DailyBudgetDisplay: View {
           imageName: "plus",
           text: "5",
           action: { adaptTotalAmount(5) },
-          foregroundColor: .white,
-          backgroundColor: .dailyBudgetPurple,
+          foregroundColor: .dailyBudgetPurple,
           shadowColor: .dailyBudgetPurple
         )
         
@@ -76,8 +73,7 @@ struct DailyBudgetDisplay: View {
           imageName: "plus",
           text: "10",
           action: { adaptTotalAmount(10) },
-          foregroundColor: .white,
-          backgroundColor: .dailyBudgetPurple,
+          foregroundColor: .dailyBudgetPurple,
           shadowColor: .dailyBudgetPurple
         )
       }
@@ -91,7 +87,6 @@ struct DailyBudgetDisplay: View {
         text: "1",
         action: { adaptDailyAmount(-1) },
         foregroundColor: .dailyBudgetPurple,
-        backgroundColor: .white,
         shadowColor: .black
       )
       
@@ -105,7 +100,6 @@ struct DailyBudgetDisplay: View {
         text: "1",
         action: { adaptDailyAmount(1) },
         foregroundColor: .dailyBudgetPurple,
-        backgroundColor: .white,
         shadowColor: .black
       )
     }
@@ -232,16 +226,14 @@ struct DailyBudgetDisplay: View {
   }
 }
 
-struct DailyBudgetView_Previews: PreviewProvider {
-  static var previews: some View {
-    DailyBudgetDisplay(
-      checkIfBudgetNeedsResetting: {},
-      currentTotalAmount: 120,
-      currentDailyAmount: 23,
-      adaptTotalAmount: {_ in },
-      adaptDailyAmount: {_ in },
-      resetDates: "ResetDate",
-      setDebugDayReset: {}
-    )
-  }
+#Preview {
+  DailyBudgetDisplay(
+    checkIfBudgetNeedsResetting: {},
+    currentTotalAmount: 120,
+    currentDailyAmount: 23,
+    adaptTotalAmount: {_ in },
+    adaptDailyAmount: {_ in },
+    resetDates: "ResetDate",
+    setDebugDayReset: {}
+  )
 }
