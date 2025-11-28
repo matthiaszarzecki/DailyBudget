@@ -5,7 +5,6 @@
 //  Created by Matthias Zarzecki on 28.04.21.
 //
 
-import Foundation
 import SwiftUI
 
 class DailyBudgetViewModel: ObservableObject {
@@ -30,43 +29,7 @@ class DailyBudgetViewModel: ObservableObject {
     print("### Checking for update after starting app")
     checkIfBudgetNeedsResetting()
   }
-  
-  func getResetDatesDisplay() -> String {
-    if let dateDay = dateFromString(resetDateDay), let dateMonth = dateFromString(resetDateMonth) {
-      let resetDateDayFormatted = dateDay.formatted()
-      let resetDateMonthFormatted = dateMonth.formatted()
-      return "Reset Day: \(resetDateDayFormatted)\nReset Month: \(resetDateMonthFormatted)"
-    }
-    return ""
-  }
 
-  private func dateFromString(_ dateString: String) -> Date? {
-    let date = ISO8601DateFormatter().date(from: dateString)
-    return date
-  }
-
-  func setDebugDayReset() {
-    // Set new reset date for tomorrow
-    resetDateDay = getResetDateForTwoMinutesFromNow()
-    print("### Next Daily Reset: \(resetDateDay)")
-  }
-  
-  func adaptTotalAmount(amount: Int) {
-    self.state.currentTotalAmount += amount
-    savedTotalAmount = self.state.currentTotalAmount
-  }
-  
-  /// Resets the Total Amount to the saved Monthly Amount.
-  func resetTotalAmount() {
-    self.state.currentTotalAmount = 0
-    savedTotalAmount = self.state.currentTotalAmount
-  }
-  
-  func adaptDailyAmount(amount: Int) {
-    self.state.currentDailyAmount += amount
-    savedDailyAmount = self.state.currentDailyAmount
-  }
-  
   var shouldUpdateMonth: Bool {
     if let expiryDateMonthParsed = ISO8601DateFormatter().date(from: resetDateMonth),
        Date() > expiryDateMonthParsed {
@@ -106,8 +69,44 @@ class DailyBudgetViewModel: ObservableObject {
       setResetDates()
     }
   }
-  
-  func setResetDates() {
+
+  func getResetDatesDisplay() -> String {
+    if let dateDay = dateFromString(resetDateDay), let dateMonth = dateFromString(resetDateMonth) {
+      let resetDateDayFormatted = dateDay.formatted()
+      let resetDateMonthFormatted = dateMonth.formatted()
+      return "Reset Day: \(resetDateDayFormatted)\nReset Month: \(resetDateMonthFormatted)"
+    }
+    return ""
+  }
+
+  private func dateFromString(_ dateString: String) -> Date? {
+    let date = ISO8601DateFormatter().date(from: dateString)
+    return date
+  }
+
+  func setDebugDayReset() {
+    // Set new reset date for tomorrow
+    resetDateDay = getResetDateForTwoMinutesFromNow()
+    print("### Next Daily Reset: \(resetDateDay)")
+  }
+
+  func adaptTotalAmount(amount: Int) {
+    self.state.currentTotalAmount += amount
+    savedTotalAmount = self.state.currentTotalAmount
+  }
+
+  /// Resets the Total Amount to the saved Monthly Amount.
+  func resetTotalAmount() {
+    self.state.currentTotalAmount = 0
+    savedTotalAmount = self.state.currentTotalAmount
+  }
+
+  func adaptDailyAmount(amount: Int) {
+    self.state.currentDailyAmount += amount
+    savedDailyAmount = self.state.currentDailyAmount
+  }
+
+  private func setResetDates() {
     // Set new reset date for tomorrow
     resetDateDay = getResetDateForNextDay()
     print("### Next Daily Reset: \(resetDateDay)")
@@ -117,7 +116,7 @@ class DailyBudgetViewModel: ObservableObject {
     print("### Next Monthly Reset: \(resetDateMonth)")
   }
   
-  func getResetDateForNextDay() -> String {
+  private func getResetDateForNextDay() -> String {
     // Set expiry date to next day...
     let expiryAdvance = DateComponents(day: 1)
     var nextDate = Calendar.current.date(byAdding: expiryAdvance, to: Date())!
@@ -129,7 +128,7 @@ class DailyBudgetViewModel: ObservableObject {
     return stringDate
   }
   
-  func getResetDateForTwoMinutesFromNow() -> String {
+  private func getResetDateForTwoMinutesFromNow() -> String {
     // Set expiry date to next day...
     let expiryAdvance = DateComponents(minute: 2)
     let nextDate = Calendar.current.date(byAdding: expiryAdvance, to: Date())!
@@ -142,7 +141,7 @@ class DailyBudgetViewModel: ObservableObject {
   // TODO: Add linter
 
   /// Set expiry date to the next
-  func getResetDateForNextMonth() -> String {
+  private func getResetDateForNextMonth() -> String {
     // TODO: On the first of the month this sets to the 2nd of the month, not the 1st of the next month
 
     // possible 1st day, which is the

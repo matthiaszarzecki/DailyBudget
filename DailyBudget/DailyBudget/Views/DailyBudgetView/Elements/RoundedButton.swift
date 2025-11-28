@@ -18,9 +18,7 @@ struct RoundedButton: View {
 
   var body: some View {
     Button(
-      action: {
-        action()
-      },
+      action: action,
       label: {
         HStack(spacing: 2) {
           Image(systemName: imageName)
