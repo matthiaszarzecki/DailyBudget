@@ -113,6 +113,7 @@ struct DailyBudgetDisplay: View {
   }
 
   private let elementFraction: CGFloat = 0.45
+
   private var centerFreaction: CGFloat {
     1 - elementFraction * 2
   }

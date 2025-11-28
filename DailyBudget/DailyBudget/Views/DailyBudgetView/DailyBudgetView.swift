@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DailyBudgetView: View {
   @ObservedObject private var viewModel = DailyBudgetViewModel()
-  
+
   var body: some View {
     DailyBudgetDisplay(
       checkIfBudgetNeedsResetting: viewModel.checkIfBudgetNeedsResetting,
@@ -28,9 +28,8 @@ struct DailyBudgetView: View {
     checkIfBudgetNeedsResetting: {},
     currentTotalAmount: 120,
     currentDailyAmount: 23,
-    adaptTotalAmount: {_ in },
-    adaptDailyAmount: {_ in },
+    adaptTotalAmount: { _ in },
+    adaptDailyAmount: { _ in },
     resetDates: "ResetDate",
-    setDebugDayReset: {}
-  )
+  ) {}
 }

@@ -11,11 +11,11 @@ import SwiftUI
 extension Color {
   static let dailyBudgetPurple = Color(hex: "AC7FFF")
   static let dailyBudgetPurpleLight = Color(hex: "E9DDFF")
-  
+
   /// Creates a SwiftUI color from a hex code.
   init(hex: String) {
     let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
-    var int: UInt64 = 0
+    var int: UInt64 = .zero
     Scanner(string: hex).scanHexInt64(&int)
     let a, r, g, b: UInt64
     switch hex.count {
@@ -28,7 +28,7 @@ extension Color {
     default:
       (a, r, g, b) = (1, 1, 1, 0)
     }
-    
+
     self.init(
       .sRGB,
       red: Double(r) / 255,

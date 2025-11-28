@@ -14,9 +14,9 @@ struct RotatingGlowingBackground: View {
       LinearGradient(
         gradient: Gradient(
           colors: [
-            Color(red:1, green:0.3, blue:0.45),
-            Color(red:0.45, green:0.15, blue:1),
-            Color(red:0, green:0.85, blue:0.9)
+            Color(red: 1, green: 0.3, blue: 0.45),
+            Color(red: 0.45, green: 0.15, blue: 1),
+            Color(red: 0, green: 0.85, blue: 0.9)
           ]
         ),
         startPoint: .topLeading,

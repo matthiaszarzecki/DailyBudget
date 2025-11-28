@@ -9,7 +9,7 @@ import SwiftUI
 
 class DailyBudgetViewModel: ObservableObject {
   @Published private(set) var state = DailyBudgetViewState()
-  
+
   @AppStorage("reset_date_day")
   private var resetDateDay: String = ISO8601DateFormatter().string(from: Date.distantPast)
 
@@ -37,7 +37,7 @@ class DailyBudgetViewModel: ObservableObject {
     }
     return false
   }
-  
+
   var shouldUpdateDay: Bool {
     if let expiryDateDayParsed = ISO8601DateFormatter().date(from: resetDateDay),
        Date() > expiryDateDayParsed {
@@ -45,7 +45,7 @@ class DailyBudgetViewModel: ObservableObject {
     }
     return false
   }
-  
+
   func checkIfBudgetNeedsResetting() {
     if shouldUpdateMonth {
       // If it is the next month
@@ -59,10 +59,10 @@ class DailyBudgetViewModel: ObservableObject {
     } else if shouldUpdateDay {
       // If it is the next day
       print("### Resetting Budget for the day")
-      
+
       // Add daily amount to current amount
       adaptTotalAmount(amount: state.currentDailyAmount)
-      
+
       setResetDates()
     } else {
       print("### Not Resetting Budget")

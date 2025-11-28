@@ -105,10 +105,10 @@
 		6E9FB00A263CAE5800C5CBF3 /* Elements */ = {
 			isa = PBXGroup;
 			children = (
-				6E9FB008263CAD2900C5CBF3 /* RoundedButton.swift */,
-				6E9FB00B263CB31A00C5CBF3 /* SlantedTriangleRight.swift */,
 				6E9F17BB2ED5B63500E50D13 /* DailyBudgetDisplay.swift */,
 				6E9F17B92ED5B5FA00E50D13 /* RotatingGlowingBackground.swift */,
+				6E9FB008263CAD2900C5CBF3 /* RoundedButton.swift */,
+				6E9FB00B263CB31A00C5CBF3 /* SlantedTriangleRight.swift */,
 			);
 			path = Elements;
 			sourceTree = "<group>";
@@ -576,7 +576,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = DailyBudgetTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -596,7 +596,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = DailyBudgetTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
